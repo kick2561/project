@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		body
+		{
+			position: center;
+		}
+	</style>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body background="business-background-images-for-websites-1.png" width="auto" text-align="center">
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #4CAF50;">
+			  
+				<div class="collapse navbar-collapse" id="navbarSupportedContent" >
+				  <ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+					  <a class="nav-link" href="log.html">Login <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+					  <a class="nav-link" href="register.html">Register</a>
+					</li>
+					
+					
+					
+					<li class="nav-item active">
+							<a class="nav-link" href="chatbot.html">Chat</a>
+						  </li>
+				  </ul>
+				  <form class="form-inline my-2 my-lg-0">
+				  	
+				  	
+					<!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" > -->
+
+
+					<a href="#" class="btn btn-outline-success my-2 my-sm-0" type="submit"><span>
+				  		<i class="fa fa-search"></i>
+				  	</span>Search</a>
+				  </form>
+				</div>
+			  </nav>
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyCQb69lVpLgi62Erj1BK7l8fvpc03PDY6s",
+	    authDomain: "cfgproject-5a81c.firebaseapp.com",
+	    databaseURL: "https://cfgproject-5a81c.firebaseio.com",
+	    projectId: "cfgproject-5a81c",
+	    storageBucket: "",
+	    messagingSenderId: "332561097117",
+	    appId: "1:332561097117:web:2fe012c5193d867c"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	</script>
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+
+	<!-- <a href="">Login</a> -->
+	<!-- <a href="register.html">Register</a>
+	<a href="newtest.html">Post new test</a>
+	<a href="taketest.html"> Take test</a>
+	<a href="newques.html">New Question</a> -->
+	<div id="yo">
+		
+	</div>
+	<div id = "questions"></div>
+
+	<script type="text/javascript">
+	var databaseURL = firebase.database().ref("/questions");
+		databaseURL.once('value').then(function(snapshot){
+			var data = (snapshot.val());
+			for(var key in data){
+				temp = data[key];
+				var div = document.getElementById('questions');
+				var head = document.createElement('div');
+				head.setAttribute('class','card');
+				head.setAttribute('style','width: 18rem;');
+				div.appendChild(head);
+				var subhead = document.createElement('div');
+				subhead.setAttribute('class','card-body');
+				head.appendChild(subhead);
+				var h5 = document.createElement('h5');
+				h5.setAttribute('class','card-title');
+				h5.innerHTML = temp['title'];
+				subhead.appendChild(h5);
+				var h6 = document.createElement('h6');
+				h6.setAttribute('class','card-subtitle mb-2 text-muted');
+				subhead.appendChild(h6);
+				var p = document.createElement('p');
+				p.setAttribute('class','card-text');
+				p.innerHTML = temp['ques'].substring(1, 50);
+				subhead.appendChild(p);
+				// var a1 = document.createElement('a');
+				// a1.setAttribute('href','#');
+				// a1.setAttribute('class','card-link');
+				// subhead.appendChild(a1);
+				// var a2 = document.createElement('a');
+				// a2.setAttribute('href','#');
+				// a2.setAttribute('class','card-link');
+				// a2.innerHTML = 'heyyyyy';
+				var formelement = document.createElement("form");
+				formelement.setAttribute("action", "displayques.html");
+				formelement.setAttribute("method", "GET");
+
+				var inpkey = document.createElement("input");
+				inpkey.setAttribute("type", "hidden");
+				inpkey.setAttribute("value", key);
+				inpkey.setAttribute("name", "quesid");
+				formelement.appendChild(inpkey);
+
+				var submitkey = document.createElement("input");
+				submitkey.setAttribute("type", "submit");
+				submitkey.setAttribute("value", "View More");
+				submitkey.setAttribute("class", "btn");
+				formelement.appendChild(submitkey);
+
+				subhead.appendChild(formelement);
+
+
+
+
+
+				
+					
+			}
+		} );
+
+	firebase.auth().onAuthStateChanged(function(user) {
+
+	  if (user) {
+	  	//("You are signed in ");
+	  	alert("Welcome " + user.email);
+	  	console.log("hey");
+
+	  	var mydiv = document.getElementById("yo");
+	  	var aTag = document.createElement("button");
+	  	aTag.setAttribute("onclick", "logout()");
+	  	aTag.setAttribute("class", "btn");
+	  	aTag.innerHTML = "Logout";
+	  	mydiv.appendChild(aTag);
+
+
+	    
+	  } else {
+	    // User is signed out.
+	    // ...
+
+	  }
+});
+
+	function logout()
+	{
+		console.log("logged out");
+		firebase.auth().signOut().then(function() {
+
+			location.reload();
+  // Sign-out successful.
+}).catch(function(error) {
+  // An error happened.
+});
+	}
+// 	console.log("logged out");
+
+
+	</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

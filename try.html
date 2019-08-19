@@ -6,21 +6,21 @@
 </head>
 <body>
 
-		<script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
 
-	<!-- TODO: Add SDKs for Firebase products that you want to use
-		 https://firebase.google.com/docs/web/setup#config-web-app -->
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
 
 	<script>
 	  // Your web app's Firebase configuration
 	  var firebaseConfig = {
-		apiKey: "",
-	    authDomain: "",
-	    databaseURL: "",
-	    projectId: "",
+	    apiKey: "AIzaSyCQb69lVpLgi62Erj1BK7l8fvpc03PDY6s",
+	    authDomain: "cfgproject-5a81c.firebaseapp.com",
+	    databaseURL: "https://cfgproject-5a81c.firebaseio.com",
+	    projectId: "cfgproject-5a81c",
 	    storageBucket: "",
-	    messagingSenderId: "",
-	    appId: ""
+	    messagingSenderId: "332561097117",
+	    appId: "1:332561097117:web:2fe012c5193d867c"
 	  };
 	  // Initialize Firebase
 	  firebase.initializeApp(firebaseConfig);
@@ -32,7 +32,8 @@
 	
 		<!-- Email: <input type="text" name="email" id="email"><br>
 		Password: <input type="password" name="password" id = "password"><br> -->
-		
+		<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #4CAF50;">
+				
 				<div class="collapse navbar-collapse" id="navbarSupportedContent" >
 				  <ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
@@ -42,6 +43,9 @@
 					  <a class="nav-link" href="register.html">Register</a>
 					</li>
 					
+					<li class="nav-item active">
+							<a class="nav-link" href="chatbot.html">Chat</a>
+						  </li>
 				  </ul>
 				  <form class="form-inline my-2 my-lg-0">
 				  	
@@ -54,7 +58,7 @@
 				  	</span>Search</a>
 				  </form>
 				</div>
-			
+			  </nav>
 
 
 <div class="container">
@@ -91,7 +95,7 @@
 			.then((res)=>{
 				console.log(res);
 				console.log("hey");
-				window.location.href = "home.html";
+				window.location.href = "index.html";
 			})
 			.catch(function(error) {
 			  // Handle Errors here.
@@ -106,10 +110,5 @@
 			 
 		}
 	</script>
-		
-
-
-	
-
 </body>
 </html>		
